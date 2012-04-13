@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+PRODID:-//IVO-Core//NONSGML iCal Writer//EN
+VERSION:2.0
+CALSCALE:GREGORIAN
+<% @calendar_event.each do |calendar_event| %>
+BEGIN:VEVENT
+DTSTART:<%= calendar_time(calendar_event.start_datetime) %>
+DTEND:<%= calendar_time(calendar_event.end_datetime) %>
+DTSTAMP:<%= calendar_time(calendar_event.created_at) %>
+UID:<%= "#{calendar_event.category_id}#{calendar_time(calendar_event.created_at)}" %>@ivo.com 
+SUMMARY:<%= "#{calendar_event.referee.full_name} [#{calendar_event.customer.company_name}]" %>
+DESCRIPTION: <%= calendar_event.comments.collect(&:content) %>
+LOCATION:<%= "#{calendar_event.address.street}, #{calendar_event.address.postal_code} #{calendar_event.address.city}" %>
+TRANSP:OPAQUE
+END:VEVENT
+<% end %>
+END:VCALENDAR
