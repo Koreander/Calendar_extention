@@ -1,20 +1,17 @@
-BEGIN:VCALENDAR <%# start of the calendar %>
+BEGIN:VCALENDAR
 PRODID:-//IVO-Core//NONSGML iCal Writer//EN
 VERSION:2.0
 CALSCALE:GREGORIAN
-<%# loop which runs until every event is created in the file. It gets the dates from the IVO::Core Database.%>
 <% @calendar_event.each do |calendar_event| %>
-BEGIN:VEVENT <%# start of the event%>
-<%# the helper calendar_time converts the datetime format from the IVO::Core database into a iCalendar compatible format%>
+BEGIN:VEVENT
 DTSTART:<%= calendar_time(calendar_event.start_datetime) %>
 DTEND:<%= calendar_time(calendar_event.end_datetime) %>
 DTSTAMP:<%= calendar_time(calendar_event.created_at) %>
 UID:<%= "#{calendar_event.category_id}#{calendar_time(calendar_event.created_at)}" %>@ivo.com 
 SUMMARY:<%= "#{calendar_event.referee.full_name} [#{calendar_event.customer.company_name}]" %>
-<%# The comments Array get read out for the content %>
-DESCRIPTION: <%= calendar_event.comments.collect(&:content) %>
+DESCRIPTION:<%= calendar_event.comments.collect(&:content) %>
 LOCATION:<%= "#{calendar_event.address.street}, #{calendar_event.address.postal_code} #{calendar_event.address.city}" %>
 TRANSP:OPAQUE
-END:VEVENT <%# end of the event | end of the loop %>
+END:VEVENT
 <% end %>
-END:VCALENDAR <%# end of the Calendar%>
+END:VCALENDAR
