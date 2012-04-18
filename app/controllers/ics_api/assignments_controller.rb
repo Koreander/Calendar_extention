@@ -1,5 +1,8 @@
 class IcsApi::AssignmentsController < ApplicationController
+  # Calls the get_current_user action from below
   before_filter :get_current_user
+  
+  # no login needed for actions
   skip_before_filter :require_user
   skip_before_filter :user_setup
   
@@ -12,8 +15,9 @@ class IcsApi::AssignmentsController < ApplicationController
   end
     
   private
+  # Compares token and gets the current user user
   def get_current_user
-    unless params[:token].blank?
+    unless params[:token].empty?
       User.current = User.where(:icalendar_token => params[:token]).first
     end
   end  
