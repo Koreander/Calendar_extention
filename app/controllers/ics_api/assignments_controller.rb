@@ -8,10 +8,12 @@ class IcsApi::AssignmentsController < ApplicationController
   
   def index
          #Variable calendar_event get filled with dates from databasetable assignment
-        @calendar_event = User.current.assignments
-      respond_to do |format|
-        format.ics
-      end
+        unless params[:token].empty?
+          @calendar_event = User.current.assignments
+        end
+    respond_to do |format|
+      format.ics
+    end
   end
     
   private
