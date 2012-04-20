@@ -1,1 +1,3 @@
-This is only for the first commit.
+Die Kalender Export Funktion für das IVO::Core wurde als Individuelle Abschlussprüfung von Daniel Steiner geschrieben.
+
+Die Erweiterung dient dazu, dass jeder Benutzer des IVO::Core die möglichkeit hat, seine persönlichen Aufträge und Kalendereinträge vom IVO::Core auf sein eigenes Kalenderprogramm (iCal,Outlook) zu abonnieren.
